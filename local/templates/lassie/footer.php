@@ -1,58 +1,8 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-				</div><!--end .bx-content -->
 
-				<!-- region Sidebar -->
-				<?if (!$needSidebar):?>
-					<div class="sidebar col-md-3 col-sm-4">
-						<?$APPLICATION->IncludeComponent(
-							"bitrix:main.include",
-							"",
-							Array(
-								"AREA_FILE_SHOW" => "sect",
-								"AREA_FILE_SUFFIX" => "sidebar",
-								"AREA_FILE_RECURSIVE" => "Y",
-								"EDIT_MODE" => "html",
-							),
-							false,
-							Array('HIDE_ICONS' => 'Y')
-						);?>
-					</div>
-				<?endif?>
-				<!--endregion -->
-
-			</div><!--end row-->
-			<?$APPLICATION->IncludeComponent(
-				"bitrix:main.include",
-				"",
-				Array(
-					"AREA_FILE_SHOW" => "sect",
-					"AREA_FILE_SUFFIX" => "bottom",
-					"AREA_FILE_RECURSIVE" => "N",
-					"EDIT_MODE" => "html",
-				),
-				false,
-				Array('HIDE_ICONS' => 'Y')
-			);?>
-		</div><!--end .container.bx-content-section-->
-	</div><!--end .workarea-->
 
 	<footer class="bx-footer">
-		<div class="bx-footer-section bx-footer-bg">
-			<div class="container">
-				<?$APPLICATION->IncludeComponent(
-					"bitrix:main.include",
-					"",
-					Array(
-						"AREA_FILE_SHOW" => "file",
-						"PATH" => SITE_DIR."include/socnet_footer.php",
-						"AREA_FILE_RECURSIVE" => "N",
-						"EDIT_MODE" => "html",
-					),
-					false,
-					Array('HIDE_ICONS' => 'Y')
-				);?>
-			</div>
-		</div>
+
 		<div class="bx-footer-section py-5 bg-dark">
 			<div class="container">
 				<div class="row">
