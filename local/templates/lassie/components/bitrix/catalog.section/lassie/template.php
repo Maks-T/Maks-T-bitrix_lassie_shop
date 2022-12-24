@@ -189,6 +189,7 @@ if (!isset($arParams['HIDE_SECTION_DESCRIPTION']) || $arParams['HIDE_SECTION_DES
       $areaIds[$item['ID']] = $this->GetEditAreaId($uniqueId);
       $this->AddEditAction($uniqueId, $item['EDIT_LINK'], $elementEdit);
       $this->AddDeleteAction($uniqueId, $item['DELETE_LINK'], $elementDelete, $elementDeleteParams);
+
     }
 
     ?>
@@ -215,7 +216,7 @@ if (!isset($arParams['HIDE_SECTION_DESCRIPTION']) || $arParams['HIDE_SECTION_DES
                   'TYPE' => $rowData['TYPE'],
                   'BIG_LABEL' => 'N',
                   'BIG_DISCOUNT_PERCENT' => 'N',
-                  'BIG_BUTTONS' => 'N'
+                  'BIG_BUTTONS' => 'N',
                 ),
                 'PARAMS' => $generalParams
                   + array('SKU_PROPS' => $arResult['SKU_PROPS'][$item['IBLOCK_ID']])

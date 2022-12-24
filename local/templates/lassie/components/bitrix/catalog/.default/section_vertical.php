@@ -154,7 +154,7 @@ else
 								'SHOW_DISCOUNT_PERCENT' => $arParams['GIFTS_SHOW_DISCOUNT_PERCENT'],
 								'DISCOUNT_PERCENT_POSITION' => $arParams['DISCOUNT_PERCENT_POSITION'],
 								'SHOW_OLD_PRICE' => $arParams['GIFTS_SHOW_OLD_PRICE'],
-								'PRODUCT_DISPLAY_MODE' => 'Y',
+								'PRODUCT_DISPLAY_MODE' => 'N',
 								'PRODUCT_BLOCKS_ORDER' => $arParams['LIST_PRODUCT_BLOCKS_ORDER'],
 								'SHOW_SLIDER' => $arParams['LIST_SHOW_SLIDER'],
 								'SLIDER_INTERVAL' => isset($arParams['LIST_SLIDER_INTERVAL']) ? $arParams['LIST_SLIDER_INTERVAL'] : '',
