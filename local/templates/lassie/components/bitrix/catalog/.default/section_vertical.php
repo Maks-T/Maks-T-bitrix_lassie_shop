@@ -38,7 +38,7 @@ else
 			if ($isFilter): ?>
 				<div class="bx-sidebar-block">
 					<?
-					$APPLICATION->IncludeComponent("bitrix:catalog.smart.filter", "bootstrap_v4", array(
+					$APPLICATION->IncludeComponent("bitrix:catalog.smart.filter", "lassie", array(
 							"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 							"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 							"SECTION_ID" => $arCurSection['ID'],
@@ -71,24 +71,6 @@ else
 			//endregion
 			?>
 
-			<?
-			//region Sidebar
-			if ($isSidebar): ?>
-				<div class="d-none d-sm-block">
-					<? $APPLICATION->IncludeComponent("bitrix:main.include", "", Array(
-							"AREA_FILE_SHOW" => "file",
-							"PATH" => $arParams["SIDEBAR_PATH"],
-							"AREA_FILE_RECURSIVE" => "N",
-							"EDIT_MODE" => "html",
-						),
-						false,
-						array('HIDE_ICONS' => 'Y')
-					);
-					?>
-				</div>
-			<? endif
-			//endregion
-			?>
 		</div>
 	<?endif?>
 

@@ -178,73 +178,73 @@ if (!isset($arParams['HIDE_SECTION_DESCRIPTION']) || $arParams['HIDE_SECTION_DES
 ?>
 
 
-  <?
-  if (!empty($arResult['ITEMS']) && !empty($arResult['ITEM_ROWS']))
+<?
+if (!empty($arResult['ITEMS']) && !empty($arResult['ITEM_ROWS']))
+{
+  $areaIds = array();
+
+  foreach ($arResult['ITEMS'] as $item)
   {
-    $areaIds = array();
+    $uniqueId = $item['ID'].'_'.md5($this->randString().$component->getAction());
+    $areaIds[$item['ID']] = $this->GetEditAreaId($uniqueId);
+    $this->AddEditAction($uniqueId, $item['EDIT_LINK'], $elementEdit);
+    $this->AddDeleteAction($uniqueId, $item['DELETE_LINK'], $elementDelete, $elementDeleteParams);
 
-    foreach ($arResult['ITEMS'] as $item)
-    {
-      $uniqueId = $item['ID'].'_'.md5($this->randString().$component->getAction());
-      $areaIds[$item['ID']] = $this->GetEditAreaId($uniqueId);
-      $this->AddEditAction($uniqueId, $item['EDIT_LINK'], $elementEdit);
-      $this->AddDeleteAction($uniqueId, $item['DELETE_LINK'], $elementDelete, $elementDeleteParams);
+  }
 
-    }
-
-    ?>
+  ?>
     <!-- items-container -->
-    <ul class="goods <?= $arParams['IS_POPULAR_SECTION'] ?'product-page__goods':''?>" data-entity="<?=$containerName?>">
-      <?
-    foreach ($arResult['ITEM_ROWS'] as $rowData)
+<ul class="goods <?= $arParams['IS_POPULAR_SECTION'] ?'product-page__goods':''?>" data-entity="<?=$containerName?>">
+  <?
+  foreach ($arResult['ITEM_ROWS'] as $rowData)
+  {
+    $rowItems = array_splice($arResult['ITEMS'], 0, $rowData['COUNT']);
+    foreach ($rowItems as $item)
     {
-      $rowItems = array_splice($arResult['ITEMS'], 0, $rowData['COUNT']);
-      foreach ($rowItems as $item)
-      {
-      
-        ?>
 
-    <li class="goods__item" data-entity="items-row">
-            <?
-            $APPLICATION->IncludeComponent(
-              'bitrix:catalog.item',
-              'lassie',
-              array(
-                'RESULT' => array(
-                  'ITEM' => $item,
-                  'AREA_ID' => $areaIds[$item['ID']],
-                  'TYPE' => $rowData['TYPE'],
-                  'BIG_LABEL' => 'N',
-                  'BIG_DISCOUNT_PERCENT' => 'N',
-                  'BIG_BUTTONS' => 'N',
-                ),
-                'PARAMS' => $generalParams
-                  + array('SKU_PROPS' => $arResult['SKU_PROPS'][$item['IBLOCK_ID']])
-              ),
-              $component,
-              array('HIDE_ICONS' => 'Y')
-            );
-            ?>
-    </li>
-        <?
-      }
       ?>
 
-        </ul>
+        <li class="goods__item" data-entity="items-row">
+          <?
+          $APPLICATION->IncludeComponent(
+            'bitrix:catalog.item',
+            'lassie',
+            array(
+              'RESULT' => array(
+                'ITEM' => $item,
+                'AREA_ID' => $areaIds[$item['ID']],
+                'TYPE' => $rowData['TYPE'],
+                'BIG_LABEL' => 'N',
+                'BIG_DISCOUNT_PERCENT' => 'N',
+                'BIG_BUTTONS' => 'N',
+              ),
+              'PARAMS' => $generalParams
+                + array('SKU_PROPS' => $arResult['SKU_PROPS'][$item['IBLOCK_ID']])
+            ),
+            $component,
+            array('HIDE_ICONS' => 'Y')
+          );
+          ?>
+        </li>
       <?
     }
-    unset($generalParams, $rowItems);
     ?>
-      <!-- items-container -->
+
+      </ul>
     <?
   }
-  else
-  {
-    echo "Раздел пуст";
-    // load css for bigData/deferred load
-
-  }
+  unset($generalParams, $rowItems);
   ?>
+    <!-- items-container -->
+  <?
+}
+else
+{
+  echo "Раздел пуст";
+  // load css for bigData/deferred load
+
+}
+?>
 
 <?
 if ($showLazyLoad)
