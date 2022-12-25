@@ -1,4 +1,6 @@
-<? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
+<? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
+  die();
+}
 
 use \Bitrix\Main\Localization\Loc;
 
@@ -12,27 +14,24 @@ use \Bitrix\Main\Localization\Loc;
  * @var string $componentPath
  *
  *  _________________________________________________________________________
- * |	Attention!
- * |	The following comments are for system use
- * |	and are required for the component to work correctly in ajax mode:
- * |	<!-- items-container -->
- * |	<!-- pagination-container -->
- * |	<!-- component-end -->
+ * |    Attention!
+ * |    The following comments are for system use
+ * |    and are required for the component to work correctly in ajax mode:
+ * |    <!-- items-container -->
+ * |    <!-- pagination-container -->
+ * |    <!-- component-end -->
  */
 
 $this->setFrameMode(true);
 $this->addExternalCss('/bitrix/css/main/bootstrap.css');
 
-if (!empty($arResult['NAV_RESULT']))
-{
-  $navParams =  array(
+if (!empty($arResult['NAV_RESULT'])) {
+  $navParams = array(
     'NavPageCount' => $arResult['NAV_RESULT']->NavPageCount,
     'NavPageNomer' => $arResult['NAV_RESULT']->NavPageNomer,
     'NavNum' => $arResult['NAV_RESULT']->NavNum
   );
-}
-else
-{
+} else {
   $navParams = array(
     'NavPageCount' => 1,
     'NavPageNomer' => 1,
@@ -44,8 +43,7 @@ $showTopPager = false;
 $showBottomPager = false;
 $showLazyLoad = false;
 
-if ($arParams['PAGE_ELEMENT_COUNT'] > 0 && $navParams['NavPageCount'] > 1)
-{
+if ($arParams['PAGE_ELEMENT_COUNT'] > 0 && $navParams['NavPageCount'] > 1) {
   $showTopPager = $arParams['DISPLAY_TOP_PAGER'];
   $showBottomPager = $arParams['DISPLAY_BOTTOM_PAGER'];
   $showLazyLoad = $arParams['LAZY_LOAD'] === 'Y' && $navParams['NavPageNomer'] != $navParams['NavPageCount'];
@@ -54,8 +52,7 @@ if ($arParams['PAGE_ELEMENT_COUNT'] > 0 && $navParams['NavPageCount'] > 1)
 $templateLibrary = array('popup', 'ajax', 'fx');
 $currencyList = '';
 
-if (!empty($arResult['CURRENCIES']))
-{
+if (!empty($arResult['CURRENCIES'])) {
   $templateLibrary[] = 'currency';
   $currencyList = CUtil::PhpToJSObject($arResult['CURRENCIES'], false, true, true);
 }
@@ -81,20 +78,16 @@ $positionClassMap = array(
 );
 
 $discountPositionClass = '';
-if ($arParams['SHOW_DISCOUNT_PERCENT'] === 'Y' && !empty($arParams['DISCOUNT_PERCENT_POSITION']))
-{
-  foreach (explode('-', $arParams['DISCOUNT_PERCENT_POSITION']) as $pos)
-  {
-    $discountPositionClass .= isset($positionClassMap[$pos]) ? ' '.$positionClassMap[$pos] : '';
+if ($arParams['SHOW_DISCOUNT_PERCENT'] === 'Y' && !empty($arParams['DISCOUNT_PERCENT_POSITION'])) {
+  foreach (explode('-', $arParams['DISCOUNT_PERCENT_POSITION']) as $pos) {
+    $discountPositionClass .= isset($positionClassMap[$pos]) ? ' ' . $positionClassMap[$pos] : '';
   }
 }
 
 $labelPositionClass = '';
-if (!empty($arParams['LABEL_PROP_POSITION']))
-{
-  foreach (explode('-', $arParams['LABEL_PROP_POSITION']) as $pos)
-  {
-    $labelPositionClass .= isset($positionClassMap[$pos]) ? ' '.$positionClassMap[$pos] : '';
+if (!empty($arParams['LABEL_PROP_POSITION'])) {
+  foreach (explode('-', $arParams['LABEL_PROP_POSITION']) as $pos) {
+    $labelPositionClass .= isset($positionClassMap[$pos]) ? ' ' . $positionClassMap[$pos] : '';
   }
 }
 
@@ -153,25 +146,23 @@ $generalParams = array(
   'MESS_NOT_AVAILABLE' => $arParams['~MESS_NOT_AVAILABLE']
 );
 
-$obName = 'ob'.preg_replace('/[^a-zA-Z0-9_]/', 'x', $this->GetEditAreaId($navParams['NavNum']));
-$containerName = 'container-'.$navParams['NavNum'];
+$obName = 'ob' . preg_replace('/[^a-zA-Z0-9_]/', 'x', $this->GetEditAreaId($navParams['NavNum']));
+$containerName = 'container-' . $navParams['NavNum'];
 
-if ($showTopPager)
-{
+if ($showTopPager) {
   ?>
-    <div data-pagination-num="<?=$navParams['NavNum']?>">
+    <div data-pagination-num="<?= $navParams['NavNum'] ?>">
         <!-- pagination-container -->
-      <?=$arResult['NAV_STRING']?>
+      <?= $arResult['NAV_STRING'] ?>
         <!-- pagination-container -->
     </div>
   <?
 }
 
-if (!isset($arParams['HIDE_SECTION_DESCRIPTION']) || $arParams['HIDE_SECTION_DESCRIPTION'] !== 'Y')
-{
+if (!isset($arParams['HIDE_SECTION_DESCRIPTION']) || $arParams['HIDE_SECTION_DESCRIPTION'] !== 'Y') {
   ?>
-    <div class="bx-section-desc bx-<?=$arParams['TEMPLATE_THEME']?>">
-        <p class="bx-section-desc-post"><?=$arResult['DESCRIPTION'] ?? ''?></p>
+    <div class="bx-section-desc bx-<?= $arParams['TEMPLATE_THEME'] ?>">
+        <p class="bx-section-desc-post"><?= $arResult['DESCRIPTION'] ?? '' ?></p>
     </div>
   <?
 }
@@ -179,13 +170,11 @@ if (!isset($arParams['HIDE_SECTION_DESCRIPTION']) || $arParams['HIDE_SECTION_DES
 
 
 <?
-if (!empty($arResult['ITEMS']) && !empty($arResult['ITEM_ROWS']))
-{
+if (!empty($arResult['ITEMS']) && !empty($arResult['ITEM_ROWS'])) {
   $areaIds = array();
 
-  foreach ($arResult['ITEMS'] as $item)
-  {
-    $uniqueId = $item['ID'].'_'.md5($this->randString().$component->getAction());
+  foreach ($arResult['ITEMS'] as $item) {
+    $uniqueId = $item['ID'] . '_' . md5($this->randString() . $component->getAction());
     $areaIds[$item['ID']] = $this->GetEditAreaId($uniqueId);
     $this->AddEditAction($uniqueId, $item['EDIT_LINK'], $elementEdit);
     $this->AddDeleteAction($uniqueId, $item['DELETE_LINK'], $elementDelete, $elementDeleteParams);
@@ -194,52 +183,47 @@ if (!empty($arResult['ITEMS']) && !empty($arResult['ITEM_ROWS']))
 
   ?>
     <!-- items-container -->
-<ul class="goods <?= $arParams['IS_POPULAR_SECTION'] ?'product-page__goods':''?>" data-entity="<?=$containerName?>">
-  <?
-  foreach ($arResult['ITEM_ROWS'] as $rowData)
-  {
-    $rowItems = array_splice($arResult['ITEMS'], 0, $rowData['COUNT']);
-    foreach ($rowItems as $item)
-    {
 
-      ?>
-
-        <li class="goods__item" data-entity="items-row">
-          <?
-          $APPLICATION->IncludeComponent(
-            'bitrix:catalog.item',
-            'lassie',
-            array(
-              'RESULT' => array(
-                'ITEM' => $item,
-                'AREA_ID' => $areaIds[$item['ID']],
-                'TYPE' => $rowData['TYPE'],
-                'BIG_LABEL' => 'N',
-                'BIG_DISCOUNT_PERCENT' => 'N',
-                'BIG_BUTTONS' => 'N',
-              ),
-              'PARAMS' => $generalParams
-                + array('SKU_PROPS' => $arResult['SKU_PROPS'][$item['IBLOCK_ID']])
-            ),
-            $component,
-            array('HIDE_ICONS' => 'Y')
-          );
-          ?>
-        </li>
+    <ul class="goods <?= $arParams['IS_POPULAR_SECTION'] ? 'product-page__goods' : '' ?>"
+        data-entity="<?= $containerName ?>">
       <?
-    }
-    ?>
+      foreach ($arResult['ITEM_ROWS'] as $rowData) {
+        $rowItems = array_splice($arResult['ITEMS'], 0, $rowData['COUNT']);
 
-      </ul>
-    <?
-  }
-  unset($generalParams, $rowItems);
-  ?>
+        foreach ($rowItems as $item) {
+          ?>
+
+            <li class="goods__item" data-entity="items-row">
+              <?
+              $APPLICATION->IncludeComponent(
+                'bitrix:catalog.item',
+                'lassie',
+                array(
+                  'RESULT' => array(
+                    'ITEM' => $item,
+                    'AREA_ID' => $areaIds[$item['ID']],
+                    'TYPE' => $rowData['TYPE'],
+                    'BIG_LABEL' => 'N',
+                    'BIG_DISCOUNT_PERCENT' => 'N',
+                    'BIG_BUTTONS' => 'N',
+                  ),
+                  'PARAMS' => $generalParams
+                    + array('SKU_PROPS' => $arResult['SKU_PROPS'][$item['IBLOCK_ID']])
+                ),
+                $component,
+                array('HIDE_ICONS' => 'Y')
+              );
+              ?>
+            </li>
+          <?
+        }
+      }
+      unset($generalParams, $rowItems);
+      ?>
+    </ul>
     <!-- items-container -->
   <?
-}
-else
-{
+} else {
   echo "Раздел пуст";
   // load css for bigData/deferred load
 
@@ -247,24 +231,22 @@ else
 ?>
 
 <?
-if ($showLazyLoad)
-{
+if ($showLazyLoad) {
   ?>
-    <div class="row bx-<?=$arParams['TEMPLATE_THEME']?>">
+    <div class="row bx-<?= $arParams['TEMPLATE_THEME'] ?>">
         <div class="btn btn-default btn-lg center-block" style="margin: 15px;"
-             data-use="show-more-<?=$navParams['NavNum']?>">
-          <?=$arParams['MESS_BTN_LAZY_LOAD']?>
+             data-use="show-more-<?= $navParams['NavNum'] ?>">
+          <?= $arParams['MESS_BTN_LAZY_LOAD'] ?>
         </div>
     </div>
   <?
 }
 
-if ($showBottomPager)
-{
+if ($showBottomPager) {
   ?>
-    <div data-pagination-num="<?=$navParams['NavNum']?>">
+    <div data-pagination-num="<?= $navParams['NavNum'] ?>">
         <!-- pagination-container -->
-      <?=$arResult['NAV_STRING']?>
+      <?= $arResult['NAV_STRING'] ?>
         <!-- pagination-container -->
     </div>
   <?
@@ -312,4 +294,3 @@ $signedParams = $signer->sign(base64_encode(serialize($arResult['ORIGINAL_PARAME
         container: '<?=$containerName?>'
     });
 </script>
-<!-- component-end -->

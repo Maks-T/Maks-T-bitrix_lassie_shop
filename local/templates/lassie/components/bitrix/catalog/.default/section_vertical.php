@@ -389,8 +389,8 @@ else
 				if (!isset($arParams['USE_BIG_DATA']) || $arParams['USE_BIG_DATA'] != 'N')
 				{
 					?>
-					<div class="row mb-3">
-						<div class="col" data-entity="parent-container">
+
+						<div data-entity="parent-container">
 							<div class="catalog-block-header" data-entity="header" data-showed="false" style="display: none; opacity: 0;">
 								<?=GetMessage('CATALOG_PERSONAL_RECOM')?>
 							</div>
@@ -506,7 +506,7 @@ else
 							);
 							?>
 						</div>
-					</div>
+
 					<?
 				}
 			}
