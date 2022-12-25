@@ -165,20 +165,30 @@ if (!isset($arParams['HIDE_SECTION_DESCRIPTION']) || $arParams['HIDE_SECTION_DES
         <p class="bx-section-desc-post"><?= $arResult['DESCRIPTION'] ?? '' ?></p>
     </div>
     <div class="catalog__sort">
-        <div id="order-select" class="catalog__sort-group"><span class="catalog__sort-text text">Сортировать по:</span>
-            <select name="sort" class="js-select select">
-                <option value="popular">Популярности</option>
-                <option value="price">Цене</option>
-                <option value="new">Новизне</option>
+        <div class="catalog__sort-group"><span class="catalog__sort-text text">Сортировать по:</span>
+            <select name="sort" class="js-select select" onchange="location = this.value;">
+                <option value="<?= $APPLICATION->GetCurPageParam('sort=popular&order=desc', ['sort', 'order']) ?>">
+                    Популярности
+                </option>
+                <option value="<?= $APPLICATION->GetCurPageParam('sort=price&order=asc', ['sort', 'order']) ?>">Цене
+                </option>
+                <option value="<?= $APPLICATION->GetCurPageParam('sort=new&order=desc', ['sort', 'order']) ?>">Новизне
+                </option>
+                <option value="<?= $APPLICATION->GetCurPageParam('sort=available&order=desc', ['sort', 'order']) ?>">
+                    Наличию
+                </option>
             </select>
         </div>
+
         <div class="catalog__sort-group"><span class="catalog__sort-text text">Отображать по:</span>
-            <select id="values-products" class="js-select select">
+            <select name="display" class="js-select select" onchange="location = this.value;">
               <? for ($i = 3; $i <= 12; $i += 3) : ?>
-                  <option value='<?= $i + 1 ?>'><?= $i ?></option>
+                  <option value="<?= $APPLICATION->GetCurPageParam('pagelimit=' . $i,
+                    ['pagelimit']); ?>"><?= $i; ?></option>
               <? endfor ?>
             </select>
         </div>
+
     </div>
   <?
 }
@@ -186,6 +196,7 @@ if (!isset($arParams['HIDE_SECTION_DESCRIPTION']) || $arParams['HIDE_SECTION_DES
 
 
 <?
+
 if (!empty($arResult['ITEMS']) && !empty($arResult['ITEM_ROWS'])) {
   $areaIds = array();
 
