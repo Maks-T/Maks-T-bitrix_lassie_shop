@@ -29,6 +29,7 @@ else
 $isSidebar = ($arParams['SIDEBAR_DETAIL_SHOW'] == 'Y' && !empty($arParams['SIDEBAR_PATH']));
 $isSidebarLeft = isset($arParams['SIDEBAR_SECTION_POSITION']) && $arParams['SIDEBAR_SECTION_POSITION'] === 'left';
 ?>
+
 <div class="row bx-<?=$arParams['TEMPLATE_THEME']?>">
 	<div class='<?=($isSidebar ? 'col-md-9 col-sm-8' : 'col')?>'>
 		<?
@@ -218,7 +219,7 @@ $isSidebarLeft = isset($arParams['SIDEBAR_SECTION_POSITION']) && $arParams['SIDE
 			$componentElementParams['USER_CONSENT_IS_LOADED'] = $arParams['USER_CONSENT_IS_LOADED'];
 		}
 
-		$elementId = $APPLICATION->IncludeComponent('bitrix:catalog.element', 'lassie', $componentElementParams,
+		$elementId = $APPLICATION->IncludeComponent('bitrix:catalog.element', 'bootstrap_v4', $componentElementParams,
 			$component
 		);
 
@@ -427,9 +428,10 @@ $isSidebarLeft = isset($arParams['SIDEBAR_SECTION_POSITION']) && $arParams['SIDE
 					?>
 					<div class="row mb-5">
 						<div class="col" data-entity="parent-container">
-                            <h2 class="heading product-page__title" data-entity="header" data-showed="false" ><span class="heading__text"><?=GetMessage('CATALOG_POPULAR_IN_SECTION')?></span></h2>
-
-							<? $APPLICATION->IncludeComponent('bitrix:catalog.section', 'lassie', array(
+							<div class="catalog-block-header" data-entity="header" data-showed="false" style="display: none; opacity: 0;">
+								<?=GetMessage('CATALOG_POPULAR_IN_SECTION')?>
+							</div>
+							<? $APPLICATION->IncludeComponent('bitrix:catalog.section', '.default', array(
 									'IBLOCK_TYPE' => $arParams['IBLOCK_TYPE'],
 									'IBLOCK_ID' => $arParams['IBLOCK_ID'],
 									'SECTION_ID' => $arResult['VARIABLES']['SECTION_ID'],
@@ -556,8 +558,10 @@ $isSidebarLeft = isset($arParams['SIDEBAR_SECTION_POSITION']) && $arParams['SIDE
 					?>
 					<div class="row mb-5">
 						<div class="col" data-entity="parent-container">
-                            <h2 class="heading product-page__title" ata-entity="header" data-showed="false"><span class="heading__text"><?=GetMessage('CATALOG_VIEWED')?></span></h2>
-							<? $APPLICATION->IncludeComponent('bitrix:catalog.products.viewed', 'lassie', array(
+							<div class="catalog-block-header" data-entity="header" data-showed="false" style="display: none; opacity: 0;">
+								<?=GetMessage('CATALOG_VIEWED')?>
+							</div>
+							<? $APPLICATION->IncludeComponent('bitrix:catalog.products.viewed', 'bootstrap_v4', array(
 									'IBLOCK_MODE' => 'single',
 									'IBLOCK_TYPE' => $arParams['IBLOCK_TYPE'],
 									'IBLOCK_ID' => $arParams['IBLOCK_ID'],
@@ -657,5 +661,22 @@ $isSidebarLeft = isset($arParams['SIDEBAR_SECTION_POSITION']) && $arParams['SIDE
 		}
 		?>
 	</div>
-	
+	<? if ($isSidebar): ?>
+		<div class='col-md-3 col-sm-4'>
+			<?
+			$APPLICATION->IncludeComponent(
+				'bitrix:main.include',
+				'',
+				array(
+					'AREA_FILE_SHOW' => 'file',
+					'PATH' => $arParams['SIDEBAR_PATH'],
+					'AREA_FILE_RECURSIVE' => 'N',
+					'EDIT_MODE' => 'html',
+				),
+				false,
+				array('HIDE_ICONS' => 'Y')
+			);
+			?>
+		</div>
+	<? endif ?>
 </div>

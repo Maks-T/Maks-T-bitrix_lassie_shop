@@ -164,6 +164,22 @@ if (!isset($arParams['HIDE_SECTION_DESCRIPTION']) || $arParams['HIDE_SECTION_DES
     <div class="bx-section-desc bx-<?= $arParams['TEMPLATE_THEME'] ?>">
         <p class="bx-section-desc-post"><?= $arResult['DESCRIPTION'] ?? '' ?></p>
     </div>
+    <div class="catalog__sort">
+        <div id="order-select" class="catalog__sort-group"><span class="catalog__sort-text text">Сортировать по:</span>
+            <select name="sort" class="js-select select">
+                <option value="popular">Популярности</option>
+                <option value="price">Цене</option>
+                <option value="new">Новизне</option>
+            </select>
+        </div>
+        <div class="catalog__sort-group"><span class="catalog__sort-text text">Отображать по:</span>
+            <select id="values-products" class="js-select select">
+              <? for ($i = 3; $i <= 12; $i += 3) : ?>
+                  <option value='<?= $i + 1 ?>'><?= $i ?></option>
+              <? endfor ?>
+            </select>
+        </div>
+    </div>
   <?
 }
 ?>
