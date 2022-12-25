@@ -8,6 +8,7 @@
             <ul class="header__menu menu menu_width_full">
               <? foreach ($arResult as $arItem): ?>
                   <li class="menu__item"><a href="<?= $arItem["LINK"] ?>" class="menu__name"><?= $arItem["TEXT"] ?></a>
+                    <? if (!empty($arItem["SUB_ITEMS"])): ?>
                       <ul class="dropdown-menu">
                           <li class="dropdown-menu__content">
                               <div class="dropdown-menu__img">
@@ -15,26 +16,28 @@
                               </div>
                               <div class="dropdown-menu__menu-col">
                                   <ul class="vertical-menu">
-                                    <? foreach ($arItem["SUB_ITEMS"] as $arItemSub): ?>
 
-                                        <li class="vertical-menu__item"><span
-                                                    class="vertical-menu__name"><?= $arItemSub["TEXT"] ?></span>
-                                            <ul class="vertical-menu__submenu">
-                                              <? foreach ($arItemSub["SUB_ITEMS"] as $arItemSubSub): ?>
-                                                  <li class="vertical-menu__submenu-item">
-                                                      <a href="javascript:void(0);"
-                                                         class="link vertical-menu__submenu-name">
-                                                        <?= $arItemSubSub["TEXT"] ?>
-                                                      </a>
-                                                  </li>
-                                              <? endforeach; ?>
-                                            </ul>
-                                        </li>
-                                    <? endforeach; ?>
+                                      <?foreach ($arItem["SUB_ITEMS"] as $arItemSub): ?>
+
+                                          <li class="vertical-menu__item"><span
+                                                      class="vertical-menu__name"><?= $arItemSub["TEXT"] ?></span>
+                                              <ul class="vertical-menu__submenu">
+                                                <? foreach ($arItemSub["SUB_ITEMS"] as $arItemSubSub): ?>
+                                                    <li class="vertical-menu__submenu-item">
+                                                        <a href="<?= $arItemSubSub["LINK"] ?>"
+                                                           class="link vertical-menu__submenu-name">
+                                                          <?= $arItemSubSub["TEXT"] ?>
+                                                        </a>
+                                                    </li>
+                                                <? endforeach; ?>
+                                              </ul>
+                                          </li>
+                                      <? endforeach; ?>
                                   </ul>
                               </div>
                           </li>
                       </ul>
+                      <?  endif; ?>
                   </li>
               <? endforeach; ?>
             </ul>

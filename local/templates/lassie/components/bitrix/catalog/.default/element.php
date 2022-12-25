@@ -657,5 +657,5 @@ $isSidebarLeft = isset($arParams['SIDEBAR_SECTION_POSITION']) && $arParams['SIDE
 		}
 		?>
 	</div>
-	
+
 </div>
