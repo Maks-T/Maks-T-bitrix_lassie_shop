@@ -14,15 +14,14 @@ $asset->addJs(SITE_TEMPLATE_PATH . '/assets/scripts/app.min.js');
 IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"] . "/bitrix/templates/" . SITE_TEMPLATE_ID . "/header.php");
 CJSCore::Init(array("fx"));
 
-\Bitrix\Main\UI\Extension::load("ui.bootstrap4");
+/* \Bitrix\Main\UI\Extension::load("ui.bootstrap4");
 
 if (isset($_GET["theme"]) && in_array($_GET["theme"], array("blue", "green", "yellow", "red"))) {
   COption::SetOptionString("main", "wizard_eshop_bootstrap_theme_id", $_GET["theme"], false, SITE_ID);
 }
-$theme = COption::GetOptionString("main", "wizard_eshop_bootstrap_theme_id", "green", SITE_ID);
+$theme = COption::GetOptionString("main", "wizard_eshop_bootstrap_theme_id", "green", SITE_ID); */
 
 $curPage = $APPLICATION->GetCurPage(true);
-
 
 ?>
 <!DOCTYPE html>

@@ -30,7 +30,7 @@ else
 	$contentBlockClass = "col";
 }
 ?>
-<div class="row mb-4 bx-<?=$arParams["TEMPLATE_THEME"]?>">
+<div class="bx-<?=$arParams["TEMPLATE_THEME"]?>" style="display: flex;">
 	<? if ($isFilter || $isSidebar): ?>
 		<div class="col-lg-3 col-md-4 col-sm-5<?=(isset($arParams['FILTER_HIDE_ON_MOBILE']) && $arParams['FILTER_HIDE_ON_MOBILE'] === 'Y' ? ' d-none d-sm-block' : '')?>">
 			<?
