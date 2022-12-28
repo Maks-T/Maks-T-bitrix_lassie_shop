@@ -32,7 +32,7 @@ else
 ?>
 <div class="bx-<?=$arParams["TEMPLATE_THEME"]?>" style="display: flex;">
 	<? if ($isFilter || $isSidebar): ?>
-		<div class="col-lg-3 col-md-4 col-sm-5<?=(isset($arParams['FILTER_HIDE_ON_MOBILE']) && $arParams['FILTER_HIDE_ON_MOBILE'] === 'Y' ? ' d-none d-sm-block' : '')?>">
+		<div class="<?=(isset($arParams['FILTER_HIDE_ON_MOBILE']) && $arParams['FILTER_HIDE_ON_MOBILE'] === 'Y' ? ' d-none d-sm-block' : '')?>">
 			<?
 			//region Filter
 			if ($isFilter): ?>
@@ -74,7 +74,7 @@ else
 		</div>
 	<?endif?>
 
-	<div class="pb-4 <?=(($isFilter || $isSidebar) ? "col-lg-9 col-md-8 col-sm-7" : "col")?>">
+	<div class=" <?=(($isFilter || $isSidebar) ? "" : "")?>">
 		<?
 		if (ModuleManager::isModuleInstalled("sale"))
 		{

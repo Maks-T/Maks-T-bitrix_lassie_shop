@@ -8,6 +8,7 @@
 
 $this->setFrameMode(true);
 
+
 $arSkuTemplate = array();
 if (is_array($arResult['SKU_PROPS'])) {
 
@@ -15,6 +16,7 @@ if (is_array($arResult['SKU_PROPS'])) {
     $arSkuTemplate[$iblockId] = array();
 
     foreach ($skuProps as & $arProp) {
+
       ob_start();
       if ('TEXT' == $arProp['SHOW_MODE']) {
         if (5 < $arProp['VALUES_COUNT']) {
@@ -37,8 +39,8 @@ if (is_array($arResult['SKU_PROPS'])) {
               ?>
                 <div class="checkbox-tile">
                     <input
-                            id="<?= $arProp['ID'] . '_' . $arOneValue['ID']; ?>"
-                            name=""
+                            id="#ITEM#_prop_<?= $arProp['ID'] . '_' . $arOneValue['ID']; ?>"
+                            name="Good[#ITEM#_prop_]"
                             type="radio"
                             data-treevalue="<?= $arProp['ID'] . '_' . $arOneValue['ID']; ?>"
                             data-onevalue="<?= $arOneValue['ID']; ?>"
@@ -46,7 +48,7 @@ if (is_array($arResult['SKU_PROPS'])) {
                             class="checkbox-tile__elem"
                     >
                     <label
-                            for="<?= $arProp['ID'] . '_' . $arOneValue['ID']; ?>"
+                            for="#ITEM#_prop_<?= $arProp['ID'] . '_' . $arOneValue['ID']; ?>"
                             class="checkbox-tile__label"
                     ><?= htmlspecialcharsex($arOneValue['NAME']); ?></label>
                 </div>
